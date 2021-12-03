@@ -48,7 +48,16 @@ Shader "Unlit/MapShower"
             {
                 // sample the texture
                 fixed4 col = tex2D(_MainTex, i.uv);
-                return tex2D(_MainTex, i.uv) - tex2D(_MainTex, i.uv + float2(0.001, 0));
+                // return tex2D(_MainTex, i.uv) - tex2D(_MainTex, i.uv + float2(0.001, 0));
+                fixed4 c1 = tex2D(_MainTex, i.uv + float2(0.001, 0));
+                fixed4 c2 = tex2D(_MainTex, i.uv - float2(0.001, 0));
+                fixed4 c3 = tex2D(_MainTex, i.uv + float2(0, 0.001));
+                fixed4 c4 = tex2D(_MainTex, i.uv - float2(0, 0.001));
+
+                if(any(c1 != col) || any(c2 != col) || any(c3 != col) || any(c4 != col)){
+                    return fixed4(0,0,0,1);
+                }
+                return fixed4(1,1,1,1);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
