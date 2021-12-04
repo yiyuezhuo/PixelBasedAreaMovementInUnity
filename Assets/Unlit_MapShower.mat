@@ -23,6 +23,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: c3d35d5d6d6e84449811582863f10b9a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _PaletteTex:
+        m_Texture: {fileID: 2800000, guid: c3d35d5d6d6e84449811582863f10b9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RemapTex:
+        m_Texture: {fileID: 2800000, guid: c3d35d5d6d6e84449811582863f10b9a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats: []
     m_Colors: []
