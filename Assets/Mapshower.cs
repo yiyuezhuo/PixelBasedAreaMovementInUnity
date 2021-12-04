@@ -10,6 +10,9 @@ public class Mapshower : MonoBehaviour
     Color32[] remapArr;
     Texture2D paletteTex;
 
+    Color32 prevColor;
+    bool selectAny = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,11 +69,23 @@ public class Mapshower : MonoBehaviour
             int y = (int)Mathf.Floor(p.y) + height / 2;
 
             var remapColor = remapArr[x + y * width];
-            int xp = remapColor[0];
-            int yp = remapColor[1];
 
-            paletteTex.SetPixel(xp, yp, new Color32(0, 0, 255, 255));
-            paletteTex.Apply(false);
+            if(!selectAny || !prevColor.Equals(remapColor)){
+                if(selectAny){
+                    changeColor(prevColor, new Color32(255, 255, 255, 255));
+                }
+                selectAny = true;
+                prevColor = remapColor;
+                changeColor(remapColor, new Color32(0, 0, 255, 255));
+                paletteTex.Apply(false);
+            }
         }
+    }
+
+    void changeColor(Color32 remapColor, Color32 showColor){
+        int xp = remapColor[0];
+        int yp = remapColor[1];
+
+        paletteTex.SetPixel(xp, yp, showColor);
     }
 }
