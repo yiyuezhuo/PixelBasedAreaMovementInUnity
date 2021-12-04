@@ -7,6 +7,9 @@ public class Mapshower : MonoBehaviour
     int width;
     int height;
 
+    Color32[] remapArr;
+    Texture2D paletteTex;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +21,7 @@ public class Mapshower : MonoBehaviour
         height = mainTex.height;
 
         var main2remap = new Dictionary<Color32, Color32>();
-        var remapArr = new Color32[mainArr.Length];
+        remapArr = new Color32[mainArr.Length];
         int idx = 0;
         for(int i=0; i<mainArr.Length; i++){
             var mainColor = mainArr[i];
@@ -43,7 +46,7 @@ public class Mapshower : MonoBehaviour
         remapTex.Apply(false);
         material.SetTexture("_RemapTex", remapTex);
 
-        var paletteTex = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+        paletteTex = new Texture2D(256, 256, TextureFormat.RGBA32, false);
         paletteTex.filterMode = FilterMode.Point;
         paletteTex.SetPixels32(paletteArr);
         paletteTex.Apply(false);
@@ -54,6 +57,20 @@ public class Mapshower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var mousePos = Input.mousePosition;
+        var ray = Camera.main.ScreenPointToRay(mousePos);
+        RaycastHit hitInfo;
+        if(Physics.Raycast(ray, out hitInfo)){
+            var p = hitInfo.point;
+            int x = (int)Mathf.Floor(p.x) + width / 2;
+            int y = (int)Mathf.Floor(p.y) + height / 2;
+
+            var remapColor = remapArr[x + y * width];
+            int xp = remapColor[0];
+            int yp = remapColor[1];
+
+            paletteTex.SetPixel(xp, yp, new Color32(0, 0, 255, 255));
+            paletteTex.Apply(false);
+        }
     }
 }
