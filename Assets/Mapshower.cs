@@ -76,7 +76,7 @@ public class Mapshower : MonoBehaviour
                 }
                 selectAny = true;
                 prevColor = remapColor;
-                changeColor(remapColor, new Color32(0, 0, 255, 255));
+                changeColor(remapColor, new Color32(50, 0, 255, 255));
                 paletteTex.Apply(false);
             }
         }

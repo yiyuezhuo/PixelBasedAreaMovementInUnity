@@ -5,6 +5,7 @@ Shader "Unlit/MapShower"
         _MainTex ("Texture", 2D) = "white" {}
         _RemapTex ("Texture", 2D) = "white" {}
         _PaletteTex ("Texture", 2D) = "white" {}
+        _TerrainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
@@ -37,6 +38,7 @@ Shader "Unlit/MapShower"
             sampler2D _MainTex;
             sampler2D _RemapTex;
             sampler2D _PaletteTex;
+            sampler2D _TerrainTex;
             float4 _MainTex_ST;
 
             v2f vert (appdata v)
@@ -62,7 +64,8 @@ Shader "Unlit/MapShower"
                     return fixed4(0,0,0,1);
                 }
                 fixed4 index = tex2D(_RemapTex, i.uv);
-                return tex2D(_PaletteTex, index.xy * 255.0 / 256.0 + float2(0.001953125, 0.001953125));
+                fixed4 paletteValue = tex2D(_PaletteTex, index.xy * 255.0 / 256.0 + float2(0.001953125, 0.001953125));
+                return pow(tex2D(_TerrainTex, i.uv), paletteValue.r);
                 // return fixed4(1,1,1,1);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
