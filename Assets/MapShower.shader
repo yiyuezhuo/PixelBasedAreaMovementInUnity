@@ -61,6 +61,9 @@ Shader "Unlit/MapShower"
                 fixed4 c4 = tex2D(_MainTex, i.uv - float2(0, 0.001));
 
                 if(any(c1 != col) || any(c2 != col) || any(c3 != col) || any(c4 != col)){
+                    if(col.r < 0.25 || c1.r < 0.25 || c2.r < 0.25 || c3.r < 0.25 || c4.r < 0.25){
+                        return fixed4(1,0,0,1);
+                    }
                     return fixed4(0,0,0,1);
                 }
                 fixed4 index = tex2D(_RemapTex, i.uv);
