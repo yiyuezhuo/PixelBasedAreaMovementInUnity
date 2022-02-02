@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Mapshower : MonoBehaviour
 {
-    int width;
-    int height;
+    public int width;
+    public int height;
 
-    Color32[] remapArr;
-    Texture2D paletteTex;
+    public Color32[] remapArr;
+    public Texture2D paletteTex;
 
     Color32 prevColor;
     bool selectAny = false;
@@ -16,6 +16,18 @@ public class Mapshower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var material = GetComponent<Renderer>().material;
+        var mainTex = material.GetTexture("_MainTex") as Texture2D;
+
+        width = mainTex.width;
+        height = mainTex.height;
+
+        var remapTex = material.GetTexture("_RemapTex") as Texture2D;
+        remapArr = remapTex.GetPixels32();
+
+        paletteTex = material.GetTexture("_PaletteTex") as Texture2D;
+
+        /*
         var material = GetComponent<Renderer>().material;
         var mainTex = material.GetTexture("_MainTex") as Texture2D;
         var mainArr = mainTex.GetPixels32();
@@ -54,7 +66,7 @@ public class Mapshower : MonoBehaviour
         paletteTex.SetPixels32(paletteArr);
         paletteTex.Apply(false);
         material.SetTexture("_PaletteTex", paletteTex);
-
+        */
     }
 
     // Update is called once per frame

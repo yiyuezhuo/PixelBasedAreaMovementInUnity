@@ -2,10 +2,10 @@ Shader "Unlit/MapShower"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _RemapTex ("Texture", 2D) = "white" {}
-        _PaletteTex ("Texture", 2D) = "white" {}
-        _TerrainTex ("Texture", 2D) = "white" {}
+        _MainTex ("MainTex", 2D) = "white" {}
+        _RemapTex ("RemapTex", 2D) = "white" {}
+        _PaletteTex ("PaletteTex", 2D) = "white" {}
+        _TerrainTex ("TerrainTex", 2D) = "white" {}
     }
     SubShader
     {
