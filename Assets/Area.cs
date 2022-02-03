@@ -53,7 +53,7 @@ public class Area
     public Area(int id, AreaData data){
         this.id = id;
         neighbors = new HashSet<int>();
-        foreach(var nei in neighbors){
+        foreach(var nei in data.neighbors){
             neighbors.Add(nei);
         }
         center = new Vector2(data.center[0], data.center[1]);
@@ -61,6 +61,11 @@ public class Area
 
     public Color32 ToRemapColor(){
         return new Color32((byte)(id % 256), (byte)(id / 256), 255, 255);
+    }
+
+    public override string ToString()
+    {
+        return $"Area({id}, {center}, {string.Join(",", neighbors)})";
     }
 }
 
@@ -80,5 +85,10 @@ public class AreaContainer{
         var id = (int)remapColor.r + ((int)remapColor.g)*256;
         return areaList[id];
     }
+
+    public Area IdToArea(int id){
+        return areaList[id];
+    }
+
 }
 

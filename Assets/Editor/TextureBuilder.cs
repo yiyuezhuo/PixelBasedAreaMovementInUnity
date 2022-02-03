@@ -92,7 +92,7 @@ public class TextureBuilder : Editor
                 var baseArea = areaArr[baseId];
 
                 var x = i % width;
-                var y = i / height;
+                var y = i / width;
                 
                 baseArea.x += x;
                 baseArea.y += y;
